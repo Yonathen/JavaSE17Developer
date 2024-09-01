@@ -5,10 +5,10 @@
 # Creating and manipulating String
 - A `String` is a sequence of characters
 - The following two snippets creates a string
-    ```java
-    String name = "Fluffy";
-    String name = new String("Fluffy");
-    ```
+```java
+String name = "Fluffy";
+String name = new String("Fluffy");
+```
 ## Common String Functions
 
 - `charAt`, `indexOf`, `substring`
@@ -27,13 +27,13 @@
   - If either of the operands are String, it will be concatenation
   - the expression is evaluated from left to right
 
-  ```java
-  System.out.println(1+2); // 3
-  System.out.println("a" + "b"); // ab
-  System.out.println(1 + 2 + "a" + "b"); // 3ab
-  System.out.println("a" + "b" + 3); // ab3
-  System.out.println("a" + "b" + 1 + 2); // ab12
-  ```
+```java
+System.out.println(1+2); // 3
+System.out.println("a" + "b"); // ab
+System.out.println(1 + 2 + "a" + "b"); // 3ab
+System.out.println("a" + "b" + 3); // ab3
+System.out.println("a" + "b" + 1 + 2); // ab12
+```
 
 ### Determining Length### Determining length
 - `public int length()` returns length.
@@ -44,10 +44,10 @@
 
 ### Getting single character
 - `public char charAt(int index)` returns character at index `index`
-  ```java
-  var name = "animals";
-  System.out.println(name.charAt(6)); // s
-  ```
+```java
+var name = "animals";
+System.out.println(name.charAt(6)); // s
+```
 ### Finding an index
 - `public int indexOf(int ch)` 
 - `public int indexOf(int ch, int fromIndex)` 
@@ -56,13 +56,13 @@
   - looks at the characters in the string and finds the first index that matches the desired value.
   - It can also start from the requested position
 
-  ```java
-  var name = "animals";
-  System.out.println(name.indexOf('a')); // 0
-  System.out.println(name.indexOf('al')); // 4
-  System.out.println(name.indexOf('a', 4)); // 4
-  System.out.println(name.indexOf('al', 5)); // -1
-  ```
+```java
+var name = "animals";
+System.out.println(name.indexOf('a')); // 0
+System.out.println(name.indexOf('al')); // 4
+System.out.println(name.indexOf('a', 4)); // 4
+System.out.println(name.indexOf('al', 5)); // -1
+```
 ### Getting substring
 - `public String substring(int beginIndex)`
 - `public String substring(int beginIndex, int endIndex)`
@@ -70,24 +70,24 @@
   - returns part of a string from beginIndex to endIndex
   - if endIndex is not defined returns until the end of string
 
-  ```java
-  String name = "animals";
-  System.out.println(name.substring(3)); // mal
-  System.out.println(name.substring(3, 4)); // m
-  System.out.println(name.substring(3, 7)); // mals
-  System.out.println(name.substring(name.indexOf('m'))); // mal
-  ```
+```java
+String name = "animals";
+System.out.println(name.substring(3)); // mal
+System.out.println(name.substring(3, 4)); // m
+System.out.println(name.substring(3, 7)); // mals
+System.out.println(name.substring(name.indexOf('m'))); // mal
+```
 
 ### Adjusting case
 - `public String toLowerCase()`
 - `public String toUpperCase()`
   - These methods convert your string from upper case to lower case and vice versa
 
-  ```java
-  var name = "animal";
-  System.out.println("ABC123".toLowerCase()); // abc123
-  System.out.println(name.toUpperCase()); // ANIMAL
-  ```
+```java
+var name = "animal";
+System.out.println("ABC123".toLowerCase()); // abc123
+System.out.println(name.toUpperCase()); // ANIMAL
+```
 
 ### Check for equality
 - `public boolean equals(Object obj)`
@@ -96,11 +96,11 @@
     - that is because its the same for all objects
     - if you pass in something tha is not string, it simply returns false
 
-  ```java
-  System.out.println("abc".equals("ABC")); // false
-  System.out.println("ABC".equals("ABC")); // true
-  System.out.println("abc".equalsIgnoreCase("ABC")); // true
-  ```
+```java
+System.out.println("abc".equals("ABC")); // false
+System.out.println("ABC".equals("ABC")); // true
+System.out.println("abc".equalsIgnoreCase("ABC")); // true
+```
 
 ### Searching for Substrings
 - `public boolean startsWith(String prefix)`
@@ -109,21 +109,21 @@
   - `startWith` and `endsWith` looks at whether the provided value matches part of the String.
   - `contains` looks for matches anywhere in the String
 
-  ```java
-  System.out.println("abc".startsWith("a")); // true
-  System.out.println("abc".startsWith("A")); // false
-  System.out.println("abc".endsWith("c")); // true
-  System.out.println("abc".endsWith("a")); // false
-  System.out.println("abc".contains("b")); // true
-  ```
+```java
+System.out.println("abc".startsWith("a")); // true
+System.out.println("abc".startsWith("A")); // false
+System.out.println("abc".endsWith("c")); // true
+System.out.println("abc".endsWith("a")); // false
+System.out.println("abc".contains("b")); // true
+```
 
 ### Replacing Values
 - `public String replace(char oldChar, char newChar)`
 - `public String replace(CharSequence target, CharSequence replacement)`
-  ```java
-  System.out.println("abcabc".replace('a', 'A')) // AbcAbc
-  System.out.println("abcabc".replace("a", "A")) // AbcAbc
-  ```
+```java
+System.out.println("abcabc".replace('a', 'A')) // AbcAbc
+System.out.println("abcabc".replace("a", "A")) // AbcAbc
+```
 
 ### Removing Whitespace
 - `public String strip()`
@@ -153,26 +153,26 @@
       - If we don't want the tab behavior, we will add another backslash `\\t`
   - `translateEscapes()` takes these literals and turns them into equivalent escaped character
 
-  ```java
-  var str = "1\\t2";
-  System.out.println(str); // 1\t2
-  System.out.println(str.translateEscapes()); // 1    2
-  ```
-  - The first line prints the literal string \t
-    - since the backlash is escaped
-  - The second line prints the actual tab since its translated the escape
+```java
+var str = "1\\t2";
+System.out.println(str); // 1\t2
+System.out.println(str.translateEscapes()); // 1    2
+```
+- The first line prints the literal string \t
+  - since the backlash is escaped
+- The second line prints the actual tab since its translated the escape
 
 ### Checking for Empty or Blank Strings
 - `public boolean isEmpty()`
 - `public boolean isBlank()`
   - Determines whether String has length of zero or contains only whitespace characters
 
-  ```java
-  System.out.println(" ".isEmpty());  // false
-  System.out.println("".isEmpty());  // true
-  System.out.println(" ".isBlank()); // true
-  System.out.println("".isBlank()); // true
-  ```
+```java
+System.out.println(" ".isEmpty());  // false
+System.out.println("".isEmpty());  // true
+System.out.println(" ".isBlank()); // true
+System.out.println("".isBlank()); // true
+```
 
 ### Formatting values
 - `public static String format(String format, Object args...)`
@@ -183,12 +183,12 @@
     - %d : integer value like int and long
     - %f : float and double
     - %n : line break
-  ```java
-  var name = "Kate";
-  var orderId = 5;
-  System.out.println(String.format("Hello %s, Your order is %d", name, orderId));
-  System.out.println("Hello %s, Your order is %d".formatted(name, orderId))
-  ```
+```java
+var name = "Kate";
+var orderId = 5;
+System.out.println(String.format("Hello %s, Your order is %d", name, orderId));
+System.out.println("Hello %s, Your order is %d".formatted(name, orderId))
+```
 
 ## Using the StringBuilder Class
 - A small program can create a lot of String objects very quickly
@@ -566,6 +566,7 @@ System.out.println(x == concatX); // false
     }
   }
   ```
+
 ## Miscellaneous Utilities
 - `System.arraycopy()`: A utility method for efficiently copying data from one array to another. 
   - This is particularly useful in
