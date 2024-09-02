@@ -154,3 +154,356 @@ String str1 = "Java Programming"
 | float      | 32-bit decimal | N/A         |  N/A               |
 | double     | 64-bit decimal | N/A         |  N/A               |
 | char       | 16-bit Unicode | 0           |  65535             |
+
+## Primitive data types
+- There are 8 primitive data types
+  - boolean, byte, short, char, int, long, float, double
+
+### boolean type
+`boolean flag = true;`
+- has two possible values either `true` or `false`
+- default value is `false`
+
+### byte type
+`byte byteVar = 124;`
+- Can have a value from -128 to 127 (8-bit signed two's complement)
+- Default value : 0
+
+### short type
+`short shortVar = -200;`
+- Can have a value from -32768 to 32767 ( 16-bit signed two's complement)
+- Default value : 0
+
+### int type
+- Can have a value from -2^31 to (2l^31)-1 (32-bit signed two's complement)
+- Default value : 0
+
+### long type
+`long longVar = -42332200000L;`
+- Can have a value from -2^63 to (2l^63)-1 (32-bit signed two's complement)
+- Above Java 8 You can use an unsigned 64-bit integer 
+  - Min 0 & max (2^64)-1
+- Default Value : 0
+
+### float type
+`float number = -42.3f;`
+- single-precision 32-bit floating point
+- default value : 0.0f
+
+### double type 
+`double number = -42.3;`
+- double-precision 64-bit floating point
+- default value : 0.0 (0.0d)
+
+[Single Precision Vs Double Precision]: http://stackoverflow.com/questions/801117/whats-the-difference-between-a-single-precision-and-double-precision-floating-p
+
+## Reference Data Types
+- Refers to an object.
+- Unlike primitive types 
+  - Do not hold their values in the memory
+  - Rather they hold the reference point to the an object by storing the memory address where the object is located
+    - A concept referred to as a `pointer`
+- Unlike other languages java does not allow you to learn what the physical memory address is
+  - You can only use the reference to refer to the object.
+- There are two ways to assign value to a reference
+  - can be assigned to another object with same or compatible type
+  - can be assigned to a new object using the new keyword
+  Example
+  ```java
+  String greetings;
+  greetings = new String();
+  ```
+
+## Primitive Vs Reference
+- Reference types can be used to call methods assuming that the value is not null
+  - Whereas primitives do not have methods declared on them
+  Example
+  ```java
+  String reference = "Hello";
+  int len = reference.length();
+  int bad = len.length(); // DOES NOT COMPILE
+  ```
+- Reference types can be assigned null (i.e. they are not referring to anything at the moment)
+  - while attempting to assign null to primitive types will cause compilation error
+  Example
+  ```
+  int value = null; // DOES NOT COMPILE
+  String name = null; 
+  ```
+
+
+## Type Inference of var
+- This instruct the compiler to determine the type for you.
+- Compiler looks the line of the declaration and determine the type for you.
+  ```
+  public void reassignment() {
+    var number = 7;
+    number = 4;
+    number = "Five"; // Does not compile
+    int a, var b = 3; // Does not compile
+    var n = null; // Does not compile
+  }
+  ```
+  - `number = "Five"` does not compile because 
+    - The compiler has determined the type of number as int and on this step we are trying to assign string to an int variable
+  - `int a, var b = 3;` does not compile because
+    - Does not compile even if you replaced it with a real type.
+    - All types declared on the same line must have the same type and share the same declaration.
+  - `var n = null;` does not compile because
+    - The compiler is being asked to infer the type of null
+      - this could be any reference type
+      - The only kind the compiler can assign is Object
+      - That almost certainly what the author of the code intends to do.
+      - So designers of java decided not to allow initialization of var with null
+
+```java
+public void doesThisCompile(boolean check) {
+  var question; // Does not compile
+  question = 1;
+  var answer; // Does not compile
+  if (check) {
+    answer = 2;
+  } else {
+    answer = 3;
+  }
+
+  System.out.println(answer);
+}
+```
+  - compiler determines the type of declaration only on declaration. 
+  - In this case `question` and `answer` are not initialized at the moment of declaration and the compiler can not assign the type.
+
+```java
+public int addValues(var a, var b) {
+  return a + b;
+}
+```
+  - The above code does not compile because
+    - method parameters are not local variables.
+    - `var` is can only be used in local variable type inference
+
+- In Real World Scenario
+  - When you start seeing a code like the following, may be its time to start using `var` for the code readability.
+    ```java
+    PileOfPapersToFileInFileCabinet pileOfPaperToFile =
+      new PileOfPapersToFileCabinet();
+    ```
+    - After Replacing the above code with var it looks like:
+    ```java
+    var pileOfPaperToFile = new PileOfPapersToFileCabinet();
+    ```
+
+## Wrapper class
+- Each primitive type has a wrapper class, which is an object type that corresponds to the primitive.
+
+```java
+Boolean bw = Boolean.valueOf("True");
+boolean bv = bw.booleanValue();
+boolean bv1 = Boolean.parseBoolean(false);
+
+int primitiveInt = Integer.parseInt("123");
+Integer wrapperInt = Integer.valueOf("123");
+
+... = Byte.valueOf((byte) 1);
+
+... = Short.valueOf((short) 1);
+
+... = Long.valueOf(1);
+
+... = Float.valueOf((float) 1.0);
+
+... = Double.valueOf(1.0);
+
+... = Character.valueOf('c');
+
+```
+
+- All oof the Number classes comes with some useful helper methods:
+  `byteValue()`, `shortValue()`, `intValue()`, `longValue()`, `floatValue()`, `doubleValue()`
+
+  ```java
+  Double apple = Double.valueOf("200.99");
+  System.out.println(apple.byteValue()); // -56
+  System.out.println(apple.shortValue()); // 200
+  System.out.println(apple.intValue()); // 200
+  System.out.println(apple.longValue()); // 200
+  System.out.println(apple.floatValue()); // 200.99
+  System.out.println(apple.doubleValue()); // 200.99
+  ```
+
+# Arrays
+- An array is a container object that holds a fixed number of values of a single type
+- Length of array is defined at its creating
+  - After that its always fixed
+
+## Declaring a variable to refer an array
+- Syntax
+  `<type>[] <identifier>;`
+  - where
+    - type is the data type of the contained elements
+    - the brackets are indicating that this variable holds an array
+- Example
+  ```java
+  byte[] anArrayOfBytes;
+  short[] anArrayOfShorts;
+  long[] anArrayOfLongs;
+  float[] anArrayOfFloats;
+  double[] anArrayOfDoubles;
+  boolean[] anArrayOfBooleans;
+  char[] anArrayOfChars;
+  String[] anArrayOfStrings;
+  ```
+
+## Creating, Intializing and Accessing an Array
+- Syntax for creating an array using new operator
+  `<identifier> = new <type>[<size>];`
+  - Example
+    ```java
+    int[] anArray;
+    anArray = new int[10];
+    ```
+  - Initializing elements
+    ```java
+    anArray[0] = 100; // initialize first element
+    anArray[1] = 200; // initialize second element
+    anArray[2] = 300; // and so forth
+    ```
+
+- Alternatively, you can use the follwing shortcut syntax to create and initialize an array
+  `<type>[] <identifier> = { value1, value2, ... }`
+  - Example
+    ```java
+    int[] anArray = { 
+      100, 200, 300,
+      400, 500, 600,
+      700, 800, 900, 1000
+    };
+    ```
+
+## Array copying 
+- Using `System.arraycopy`
+  - Signature
+    `public static void arraycopy(Object src, int srcPos, Object dest, int destPos, int length)`
+  
+  - Example
+    ```java
+    class ArrayCopyDemo {
+      public static void main(String[] args) {
+        String[] copyFrom = {
+          "Affogato", "Americano", "Cappuccino", "Corretto", "Cortado",   
+          "Doppio", "Espresso", "Frappucino", "Freddo", "Lungo", "Macchiato",      
+          "Marocchino", "Ristretto" };
+        
+        String[] copyTo = new String[7];
+        System.arraycopy(copyFrom, 2, copyTo, 0, 7);
+        for (String coffee : copyTo) {
+          System.out.print(coffee + " ");           
+        }
+      }
+    }
+    ```
+- Using `java.util.Arrays`
+  ```java
+  class ArrayCopyOfDemo {
+    public static void main(String[] args) {
+        String[] copyFrom = {
+            "Affogato", "Americano", "Cappuccino", "Corretto", "Cortado",
+            "Doppio", "Espresso", "Frappucino", "Freddo", "Lungo", "Macchiato",
+            "Marocchino", "Ristretto" };
+        
+        String[] copyTo = java.util.Arrays.copyOfRange(copyFrom, 2, 9);
+        for (String coffee : copyTo) {
+            System.out.print(coffee + " ");
+        }
+    }
+  }
+  ```
+
+# Garbage Collection
+- Refers to the process of automatically freeing memory on the heap by deleting objects that are no longer reachable in your program.
+- There are many different algorithms for garbage collection
+- Eligible for garbage collection refers to an object's state of no longer being accessible in a program and therefore able to garbage collected.
+- Garbage-Collection eligibility is like shipping a package.
+  - Take an item seal it in a box and put it in your mailbox
+    - this is an analogy for making an item ready for garbage collection
+  - When the mail carrier comes to pick up is not in your control.
+    - It can be postal holiday, or sever weather, In this case you can call them but there is no guarantee when and if this will happen.
+    - Hopefully they will come before the mailbox is full
+  - Java also includes a built in method to help you support garbage collection where you can suggest that garbage collection run by running
+    - `System.gc();`
+    - just like post office, Java is free to ignore you.
+    - This method is not guaranteed to do anything.
+
+- An object will remain on the heap until it is no longer reachable.
+  - An object is no longer reachable when one of the two situations occurs
+    - The object no longer has any references pointing to it
+    - All references to the object have gone out of scope
+
+### Object Vs References
+- Reference is a variable that has a name and can be used to access the contents of an object
+  - Can be assigned to 
+    - Another reference
+    - Passed to a method
+    - Returned from a method
+- An object sits on the heap and does not have a name
+  - No way to access an object except through a reference
+  - come in all different shapes and sizes and consume varying amount of memory.
+  - An object can not be assigned to another object
+  - can not be passed to a method, or returned from a method
+- It is the object that is garbage collected, NOT ITS REFERENCE
+```java
+public class Scope {
+  public static void main(String[] args) {
+    String one, two;
+    one = new String("a");
+    two = new String("b");
+
+    one = two;
+    String there = one;
+    one = null;
+  }
+}
+```
+- In the above code
+  - "a" will be eligible for garbage collection when we execute `one = two` that will remove the only reference to "a"
+  - "b" doesn't go out of scope until the end of the method.
+
+# Instance Initializer Blocks
+
+- The code between two braces is called code block
+- Sometimes code blocks are inside a method
+  - These are executed when the function is called
+- Other times code blocks are defined outside the method
+  - These are called instance initializers.
+```java
+public class Bird {
+  public static void main(String[] args) {
+    { System.out.println("Feathers"); }
+  }
+
+  { System.out.println("Snowy"); }
+}
+```
+
+- The order of the execution is as follows
+  - Fields and instance initializer blocks are run in the order in which they appear in the file.
+  - Constructor runs after all fields and instance initializer blocks have run.
+
+```java
+public class Chick {
+  private String name = "Fluffy";
+  { System.out.println("Setting Field"); }
+
+  public Chick() {
+    name = "Tiny";
+    System.out.println("Setting Constructor");
+  }
+
+  public static void main(String[] args) {
+    Chick c1 = new Chick();
+    System.out.println(c1.name);
+    { System.out.println("Method Code Block"); }
+  }
+
+}
+```
