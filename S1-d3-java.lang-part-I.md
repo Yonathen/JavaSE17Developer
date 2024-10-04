@@ -35,7 +35,7 @@ System.out.println("a" + "b" + 3); // ab3
 System.out.println("a" + "b" + 1 + 2); // ab12
 ```
 
-### Determining Length### Determining length
+### Determining length
 - `public int length()` returns length.
   ```java
   var name = "animals";
