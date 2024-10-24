@@ -338,7 +338,13 @@ Integer wrapperInt = Integer.valueOf("123");
 
 ## Declaring a variable to refer an array
 - Syntax
-  `<type>[] <identifier>;`
+  ```
+  <type>[] <identifier>;
+  <type> [] <identifier>;
+  <type> []<identifier>;
+  <type> <identifier>[];
+  <type> <identifier> [];
+  ```
   - where
     - type is the data type of the contained elements
     - the brackets are indicating that this variable holds an array
@@ -353,6 +359,10 @@ Integer wrapperInt = Integer.valueOf("123");
   char[] anArrayOfChars;
   String[] anArrayOfStrings;
   ```
+
+- Multiple Array Declarations
+  - `int[] ids, types;` creates two variables of `int[]`
+  - `int ids[], types;` creates `ids of type int[]` and `types of type int`
 
 ## Creating, Intializing and Accessing an Array
 - Syntax for creating an array using new operator
@@ -418,6 +428,76 @@ Integer wrapperInt = Integer.valueOf("123");
     }
   }
   ```
+  
+## Array Sorting
+- Using `Arrays.sort`
+  ```java
+  int[] numbers = { 100, 50, 800, 300, 400};
+  System.out.println("Before sorting: " + java.util.Arrays.toString(numbers));
+  java.util.Arrays.sort(numbers);
+  System.out.println("After sorting: " + java.util.Arrays.toString(numbers));
+  ```
+
+## Array Searching 
+- Using `Arrays.binarySearch`
+  - This can be used if the array is already sorted
+  ```java
+    int[] numbers = { 100, 50, 800, 300, 400};
+    java.util.Arrays.sort(numbers);
+    System.out.println(java.util.Arrays.binarySearch(numbers, 50))
+    System.out.println(java.util.Arrays.binarySearch(numbers, 200))
+  ```
+
+## Array Comparing
+- Using `Arrays.compare()`
+  - Return values
+    - Negative : the first array is smaller than the second
+      - If all elements are the same and the second one has extra elements at the end
+      - If the first element that differs is smaller in the first array
+    - Zero : the two arrays are equal
+      - If arrays are in equal size and have the same values in each spot in the same order
+    - Positive : the first array is greater than the second
+      - If all elements are the same and the first one has extra elements at the end
+      - If the first element that differs is larger in the first array
+  - Example
+    ```java
+      System.out.println(Arrays.compare(new int[] {1}, new int[] {2}));
+    ```
+  - Rules
+    - What does smaller means
+      - null is smaller than any other value
+      - For Numbers : Normal numeric order applies
+      - For Strings
+        - One is smaller if it is the prefix of another
+        - Numbers are smaller than letters
+        - Uppercase is smaller than lowercase
+
+## Array Mismatch
+- If the array is equal, `mismatch()`
+  - returns -1
+  - Otherwise, it returns the first index where it differs
+
+## Creating Multidimensional Array
+- Declaration
+  - `int[][] vars1`
+  - `int vars2 [][]`
+  - `int[] vars3[]`
+  - `int[] vars4[], space [][]`
+    - `space` is a 3D array
+    - The rest all of them are 2D
+- Declaration and initialization
+  ```java
+    int[][] diffSizes = {{1,4}, {3}, {9,8,7}};
+  ```
+  - In this example the sizes of each array is different
+    - This is called Asymmetric Multidimensional Array
+  - Another of way of creating this is by assigning the first dimension only
+  ```java
+    int [][] diffSizes = new int[4][];
+    diffSizes[0] = new int[5];
+    diffSizes[1] = new int[3];
+  ```
+
 
 # Garbage Collection
 - Refers to the process of automatically freeing memory on the heap by deleting objects that are no longer reachable in your program.
