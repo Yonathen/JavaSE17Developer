@@ -16,8 +16,13 @@
 ## Collection Interface
 - Root interface of the collection framework hierarchy
 - Java does not provide implementation of Collection interface
-  - but provides implelentations of its subinterfaces like
+  - but provides implementation of its subinterfaces like
     - `List`, `Set`, and `Queue`
+  - **List** : An order collection of elements that allows duplicates
+  - **Set** : is a collection that does not allow duplicate entries
+  - **Queue** : is a collection that orders elements in a specific order for processing
+    - **Deque** : is a subinterface that allows the access at both ends
+  - **Map** : is a collection that maps keys to values
 ## List Interface
 - An orderd collections that allows us to added and remove elements like an array
 
@@ -40,6 +45,20 @@
   - `size()` : returns the length of a list
   - `toArray()` : converts a list into an array
   - `contains()` : returns `true` if a list contains specific element
+### Creating a List with factory methods
+- The following are factory methods to create a list
+  - `Arrays.asList(varargs)` : Returns fixed size list backed by an array
+    - Can not add elements
+    - Can replace elements
+    - Can not delete elements
+  - `List.of(varargs)` : Returns immutable list
+    - Can not add 
+    - Can not replace
+    - Can not delete
+  - `List.copyOf(collection)` : Returns immutable list with copy of original collections's values
+    - Can not add
+    - Can not replace
+    - Can not delete
 
 ### ArrayList
 - Used to implement resizable-arrays
@@ -51,12 +70,34 @@
   - Syntax
     ```java
     ArrayList<data_type> arrayList = new ArrayList<>();
+    ArrayList<data_type> arrayList = new ArrayList<>(<list>);
+    ArrayList<data_type> arrayList = new ArrayList<>(<optional_initial_capacity>);
     ```
   - Example
     ```java
     ArrayList<Integer> arrayList = new ArrayList<>();
-    ArrayList<String> arrayList = new ArrayList<>();
+    ArrayList<String> arrayList = new ArrayList<>(10);
     ```
+  - What about using `var` with `ArrayList`
+    - Consider the following
+      ```java
+      var strings = new ArrayList<String>();
+      strings.add("a");
+      ```
+      - In this case the type of `var` will be `ArrayList<String>`
+      - Then you can add `String` and iterate through the string
+    - What if we used the diamond operator with var
+      ```java 
+      var str = new ArrayList<>();
+      ```
+      - No problem here as well because the type of the var will be `ArrayList<Object>`
+    - But How about this
+      ```java
+      var list = new ArrayList<>();
+      list.add("a");
+      for (String s : list) {} // Does not compile
+      ```
+      - The type of the `var` is `ArrayList<Object>`
 #### Adding elements to an array list
   ```java
   import java.util.ArrayList;
@@ -88,6 +129,20 @@
   languages.set(2, "JS");
   System.out.println("ArrayList: " + languages);
   ```
+#### Converting from List to an Array
+- List knows how to convert itself to an array
+  ```java 
+  Object[] objectArray = list.toArray();
+  ```
+  - It defaults to ann array of class Object
+  - But if you try following, it will fail with "error: incompatible types: Object[] cannot be converted to Integer[]"
+    - To resolve this use
+      ```java
+      String[] stringArray = list.toArray(new String[0]);
+      ```
+      - Here you have specified the type of the array with `new String`
+      - the value `0` used by java to create new array of the proper size for the return
+        - If the list fits in that array it will be returned otherwise new array will be created
 
 #### Removing array list elements
   ```java
