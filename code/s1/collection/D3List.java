@@ -1,9 +1,8 @@
 package s1.collection;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
-public class D4List {
+public class D3List {
 
     List<Integer> evenNumbers;
     List<Integer> oddNumbers;
@@ -162,7 +161,7 @@ public class D4List {
     }
 
     public static void main(String[] args) {
-        D4List d4 = new D4List();
+        D3List d4 = new D3List();
         d4.demoCreatingListWithFactoryMethod();
         d4.demoCreatingListWithConstructor();
         d4.demoAddingListItems();

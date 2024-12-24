@@ -916,14 +916,17 @@ Queue<String> animals3 = new PriorityQueue<>();
 
 - Some of the commonly used methods of the Queue interface are:
 
-  - `add()` - Inserts the specified element into the queue. 
-    - If the task is successful, `add()` returns `true`, if not it `throws` an `exception`.
-  - `offer()` - Inserts the specified element into the queue.
-    - If the task is successful, `offer()` returns `true`, if not it returns `false`.
-  - `element()` - Returns the head of the queue. `Throws` an exception if the queue is `empty`.
-  - `peek()` - Returns the head of the queue. Returns `null` if the queue is `empty`.
-  - `remove()` - Returns and removes the head of the queue. Throws an exception if the queue is empty.
-  - `poll()` - Returns and removes the head of the queue. Returns `null` if the queue is `empty`.
+  - Add to the back
+    - `add()` - Inserts the specified element into the queue. 
+      - If the task is successful, `add()` returns `true`, if not it `throws` an `exception`.
+    - `offer()` - Inserts the specified element into the queue.
+      - If the task is successful, `offer()` returns `true`, if not it returns `false`.
+  - Reading from front
+    - `element()` - Returns the head of the queue. `Throws` an exception if the queue is `empty`.
+    - `peek()` - Returns the head of the queue. Returns `null` if the queue is `empty`.
+  - Get and remover from front
+    - `remove()` - Returns and removes the head of the queue. Throws an exception if the queue is empty.
+    - `poll()` - Returns and removes the head of the queue. Returns `null` if the queue is `empty`.
 
 ### PriorityQueue
 - Unlike a normal queues, Priority Queue are retrived in sorted queue
@@ -992,21 +995,28 @@ Deque<String> animal1 = new ArrayDeque<>();
 // LinkedList Implementation of Deque
 Deque<String> animal2 = new LinkedList<>();
 ```
+- Using `LinkedList` 
+  - main benefit is it implements both `List` and `Deque`
+    - And you can use `List` methods
+  - The tread-off is that its isn't pure `Queue`
+    - we can use `ArrayDeque` if we dont need to use `List` methods
 
 - Besides methods available in the Queue interface, the Deque interface also includes the following methods:
-
-  - `addFirst()` - Adds the specified element at the beginning of the deque. Throws an `exception` if the deque is full.
-  - `addLast()` - Adds the specified element at the end of the deque. Throws an `exception` if the deque is full.
-  - `offerFirst()` - Adds the specified element at the beginning of the deque. Returns `false` if the deque is full.
-  - `offerLast()` - Adds the specified element at the end of the deque. Returns `false` if the deque is full.
-  - `getFirst()` - Returns the first element of the deque. Throws an `exception` if the deque is empty.
-  - `getLast()` - Returns the last element of the deque. Throws an `exception` if the deque is empty.
-  - `peekFirst()` - Returns the first element of the deque. Returns `null` if the deque is empty.
-  - `peekLast()` - Returns the last element of the deque. Returns `null` if the deque is empty.
-  - `removeFirst()` - Returns and removes the first element of the deque. Throws an `exception` if the deque is empty.
-  - `removeLast()` - Returns and removes the last element of the deque. Throws an `exception` if the deque is empty.
-  - `pollFirst()` - Returns and removes the first element of the deque. Returns `null` if the deque is empty.
-  - `pollLast()` - Returns and removes the last element of the deque. Returns `null` if the deque is empty.
+  - Adding to deque
+    - `addFirst()` - Adds the specified element at the beginning of the deque. Throws an `exception` if the deque is full.
+    - `addLast()` - Adds the specified element at the end of the deque. Throws an `exception` if the deque is full.
+    - `offerFirst()` - Adds the specified element at the beginning of the deque. Returns `false` if the deque is full.
+    - `offerLast()` - Adds the specified element at the end of the deque. Returns `false` if the deque is full.
+  - Accessing element from deque
+    - `getFirst()` - Returns the first element of the deque. Throws an `exception` if the deque is empty.
+    - `getLast()` - Returns the last element of the deque. Throws an `exception` if the deque is empty.
+    - `peekFirst()` - Returns the first element of the deque. Returns `null` if the deque is empty.
+    - `peekLast()` - Returns the last element of the deque. Returns `null` if the deque is empty.
+  - Removing element from deque
+    - `removeFirst()` - Returns and removes the first element of the deque. Throws an `exception` if the deque is empty.
+    - `removeLast()` - Returns and removes the last element of the deque. Throws an `exception` if the deque is empty.
+    - `pollFirst()` - Returns and removes the first element of the deque. Returns `null` if the deque is empty.
+    - `pollLast()` - Returns and removes the last element of the deque. Returns `null` if the deque is empty.
 
 #### Deque as Stack Data Structure
 - Here are the methods the Deque interface provides to implement stack:
@@ -1401,6 +1411,18 @@ class Main {
   }
 }
 ```
+- Using `Map.of()`, `Map.copyOf()`, `Map.ofEntries()`
+  ```java
+    import java.util.HashMap;import java.util.Map;
+    HashMap<String, Integer> numbers = Map.of("one", 1, "two", 2, "three", 3, "four", 4);
+    HashMap<String, Integer> numbersCopyOf = Map.copyOf(numbers);
+    HashMap<String, Integer> numbersOfEntries = Map.ofEntries(
+        Map.entry("five", 5),
+        Map.entry("six", 6),
+        Map.entry("seven", 7),
+        Map.entry("eight", 8)
+    );
+  ```
 
 #### Adding elements to a HashMap
 ```java
@@ -1425,7 +1447,7 @@ languages.getOrDefault("GO", 26);
   - `values()` : Returns a set of all the values present on the map
   - `entrySet()` : Returns a set of all key/value mapping present on the map
 
-#### Changing HashPap value
+#### Changing HashMap value
 - We can use `replace()` as follows
 ```java
 languages.replace("C", 67)
@@ -1476,6 +1498,47 @@ class Main {
   - `computeIfAbsent()`	computes value if a mapping for the key is not present
   - `computeIfPresent()`	computes a value for mapping if the key is present
 
+#### Merging key-value pairs base on specific logic
+- Syntax
+  ```java
+  V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction);
+  ```
+  - `key` : key to merge
+  - `value` : New value to be associated with the key if it does not already exist
+  - `remappingFunction` : Function that takes the current value and the new value and defines how to merge them if the key is already present in the map
+- How it works
+  - If key is not present
+    - Simply insert the new key/value pair into the map
+  - If the key is present
+    - Apply the remappingFunction on how to merge the current value with the new value
+  - If remappingFunction returns null
+    - the key is removed from the map
+- Example usage
+  ```java
+    import java.util.HashMap;import java.util.Map;
+    Map<String, Integer> itemCount = new HashMap<>();
+    itemCount.merge("apple", 1, Integer::sum);
+    itemCount.merge("apple", 2, Integer::sum);
+    itemCount.merge("banana", 6, Integer::sum);
+    System.out.println(itemCount);
+  ```
+  - If the item is not in the map, it adds with an initial count of 1
+  - If it already exists, `Integer::sum` function adds 1 to the existing count
+
+  ```java
+    import java.util.ArrayList;import java.util.HashMap;import java.util.Map;
+    Map<String, List<String>> map = new HashMap<>();
+    
+    map.merge("fruits", new ArrayList<>(List.of("apple")), (oldList, newList) -> {
+        oldList.addAll(newList);
+        return oldList;
+    })
+    map.merge("fruits", new ArrayList<>(List.of("banna")), (oldList, newList) -> {
+        oldList.addAll(newList);
+        return oldList;
+    })
+    System.out.println(map);
+  ```
 #### Other methods
   - `merge()`	merges the specified mapping to the HashMap
   - `clone()`	makes the copy of the HashMap

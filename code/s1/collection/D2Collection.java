@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-public class D4Collection {
+public class D2Collection {
 
     List<String> languages = new ArrayList<>();
     Collection<String> copiedLanguages = new ArrayList<>();
@@ -99,7 +99,7 @@ public class D4Collection {
     }
 
     public static void main(String[] args) {
-        D4Collection d4 = new D4Collection();
+        D2Collection d4 = new D2Collection();
         d4.addingDataDemo();
         d4.removingDataDemo();
         d4.countingElementsDemo();

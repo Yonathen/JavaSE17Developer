@@ -2,7 +2,7 @@ package s1.collection;
 
 import java.util.Arrays;
 
-public class D3Array {
+public class D1Array {
     public  void printNames() {
         System.out.println("\n1. Creating an array with reference type\n===================");
         String[] names;
@@ -109,7 +109,7 @@ public class D3Array {
     }
 
     public static void main(String[] args) {
-        D3Array d3 = new D3Array();
+        D1Array d3 = new D1Array();
         d3.printNames();
         d3.printNumbers();
         d3.arrayCopyDemo();
