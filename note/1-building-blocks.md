@@ -152,9 +152,97 @@ Integer wrapperInt = Integer.valueOf("123");
   System.out.println(apple.floatValue()); // 200.99
   System.out.println(apple.doubleValue()); // 200.99
   ```
+## Defining a Text Blocks
+- Let's consider how we can create the following Strings
+  ```
+  "Java Study Guide"
+    by Scott & Jeanne
+  ```
+  - This can be created by
+  ```java
+    // ...
+    String text = "\"Java Study Guide\"\n  by Scott & Jeanne";
+    // ...
+  ```
+    - Hey, this is hard to read
+    - Luckily, java has text blocks for us
+      - also known as multiline strings
+      - The above can be written as follows
+        ```java
+          //...
+          String textBlock = """
+            "Java Study Guide"
+                by Scott & Jeanne
+          """;
+          //...
+        ```
+        - It starts and ends with `"""`
+        - Here we have a concept called incidental and essential whitespace
+          - Incidental : it happens to be there just to make the code easier to read
+          - Essential : These are spaces that are part of the string and important for you
+          - Take the most left character
+            - every space on the most left of that character is incidental
+            - every space after the most left character is essential
+
+| Formatting                   | Meaning in regular String | Meaning in text blocks       |
+|------------------------------|---------------------------|------------------------------|
+| `\"`                         | `"`                       | `"`                          |
+| `\"""`                       | Invalid                   | `"""`                        |
+| `\"\"\"`                     | `"""`                     | `"""`                        |
+| `\"\"\"`                     | `"""`                     | `"""`                        |
+| Space at the end of the line | Space                     | Ignored                      |
+| `\s`                         | Two Space                 | Two Space                    |
+| `\` at the end of the line   | Invalid                   | Ignore new line on that line |
+
+## Declaring Variables
+- A variable is name of memory that stores data
+- Syntax : `<data_type> <identifier> = <value>`
+
+### Identifying identifiers
+- there are four rules
+  - must begin with letters, underscore, or any currency symbol (&, £...)
+  - can be composed of letters, numbers, underscore, currency symbol
+  - Single underscore is not allowed as identifier
+  - Can not use the same name as reserved words
+    - but possible to use reserved datatype
+### Declaring multiple variables
+- Syntax: `<data_type> <identifier_1> = <value_1>, <identifier_2> = <value_2>`
+- Checkout the following
+```java
+boolean b1, b2;
+String s1 = "1", s2;
+double d1, double d2; // Does not compile
+int i1; int i2;
+int i3; i4; // Does not compile
+```
+
+### Creating Local Variables
+- a variable defined with in a constructor, method, or initializer blocks
+- Local variables declared with `final` are like constants in other languages
+  - you can not reassign to them
+- Local variables do not have default value
+  - Must be initialized before use
+
+### Constructor and method variables
+- Variables passed to constructor or method
+- Like local variables that have been pre-initialized
+  ```java
+    public findAnswe(boolean check) {}
+  
+    public void checkAnswer() {
+        boolean value;
+        findAnswer(value); // Does not compile
+    }
+  ```
+  - Does not compile as value is not initialized
+
+### Instance and class variables
+- Instance Variable : a value defined with in a specific instance of an object
+- Class Variable : a value defined on the class level and shared among all instance of a class
+  - A variable is class variable if it has a `static` keyword
 
 ## Type Inference of var
-- This instruct the compiler to determine the type for you.
+- This instructs the compiler to determine the type for you.
 - Compiler looks the line of the declaration and determine the type for you.
   ```
   public void reassignment() {
