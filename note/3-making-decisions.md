@@ -323,3 +323,44 @@
     - Built-in Java Array
     - An object whose type implements `java.lang.Iterable`
 
+## Adding optional labels
+- `if` statements, `switch` statements, and loops
+  - can all have optional `labels`
+- A `label` is an optional pointer to the head of a statement
+  - That allows the application flow to jump to it or break from it
+- It is single identifier (usually in snake_case for readability) followed by `:`
+    ```java
+        int[][] array = {{5, 2, 1, 3}, {3, 9, 8, 9}};
+  
+        OUTER_LOOP: for ( int[] subArray : array ) {
+            INNER_LOOP: for ( int i = 0; i < subArray.length(); i++ ) {
+                System.out.println(subArray[i]);
+            } 
+        } 
+    ```
+
+## Branching
+
+#### `break` statement
+- While working with loops there are sometimes desirable to skip some statements
+- `break` statement in java terminates the loop immediately
+    - And control of the program moves to the next statement
+
+    ```
+        optionalLabel: while ( booleanExpression ) {
+            // Body
+            break optionalLabel;
+        }
+    ```
+
+#### `continue` statement
+- Skips the current iteration of a loop
+- After the `continue` statement, the program moves to the end of the loop.
+    - And test expressing is evaluated
+
+    ```
+        optionalLabel: while ( booleanExpression ) {
+            // Body
+            continue optionalLabel;
+        }
+    ```
